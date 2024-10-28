@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "646757744612",
+    "project_id": "authentication-f633e",
+    "storage_bucket": "authentication-f633e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646757744612:android:d913a13869cf3f06ad11f1",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCskowOXPhfOAvJGxKAEdBa0iJWraZxK1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646757744612:android:187b8b29a8d32104ad11f1",
+        "android_client_info": {
+          "package_name": "com.example.authenticate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCskowOXPhfOAvJGxKAEdBa0iJWraZxK1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
