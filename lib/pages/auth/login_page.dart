@@ -1,3 +1,4 @@
+import 'package:authenticate/pages/auth/signUp_page.dart';
 import 'package:authenticate/widgets/button.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: Text(
@@ -54,7 +56,23 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(height: 35,),
-            CustomButton('Submit')
+            CustomButton('Login'),
+            SizedBox(height: 15,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+              Text('Create an Account',style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400,),),
+              TextButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> SignupPage()));
+              }, child: Text('Sign Up', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),))
+            ],),
+            SizedBox(height: 15,),
+            CustomButton2('Login With Phone', context)
+
+
+
+
+            
           ],
         ),
       ),

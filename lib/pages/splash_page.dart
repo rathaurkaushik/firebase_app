@@ -12,12 +12,12 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  SplashServices splashServices = SplashServices();
+  SplashServices splashpage = SplashServices();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    splashServices.isLogin(context);
+    splashpage.isLogin(context);
   }
 
   Widget build(BuildContext context) {
