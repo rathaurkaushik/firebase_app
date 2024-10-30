@@ -26,6 +26,8 @@ class Button extends StatelessWidget {
               child: loading
                   ? CircularProgressIndicator(
                       color: Colors.white,
+                strokeWidth: 4,
+                strokeAlign: -1.5,
                     )
                   : Text(
                       title,

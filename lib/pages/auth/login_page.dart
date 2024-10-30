@@ -16,11 +16,11 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-
+// late bool loading;
   //login function
   void login() async{
     setState(() {
-      loading = true;
+      // loading = true;
     });
     FirebaseAuth _auth = FirebaseAuth.instance;
     try{
@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       });
     }catch(e){
-      Utils().toastMeassage().toString();
+      Utils().toastMeassage(e.toString()).toString();
     }
   }
 
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 35,
             ),
-            Button(title: 'Login', voidCallback: login, loading: loading,),
+            Button(title: 'Login', voidCallback: login, /*loading: loading,*/),
             SizedBox(
               height: 15,
             ),
