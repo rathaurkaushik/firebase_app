@@ -15,12 +15,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
+bool loading = false;
 // late bool loading;
   //login function
   void login() async{
     setState(() {
-      // loading = true;
+      loading = true;
     });
     FirebaseAuth _auth = FirebaseAuth.instance;
     try{
@@ -28,10 +29,14 @@ class _LoginPageState extends State<LoginPage> {
           email: emailController.text.toString(),
           password: passwordController.text.toString()).then((value){
         setState(() {
-
+loading = false;
         });
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
       });
     }catch(e){
+      setState(() {
+        loading = false;
+      });
       Utils().toastMeassage(e.toString()).toString();
     }
   }
@@ -58,66 +63,99 @@ class _LoginPageState extends State<LoginPage> {
       body:
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                  hintText: 'Enter your email',
-                  suffixIcon: Icon(Icons.email),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15))),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            TextFormField(
-              controller: passwordController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  hintText: 'Enter your password',
-                  suffixIcon: Icon(Icons.password),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15))),
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            Button(title: 'Login', voidCallback: login, /*loading: loading,*/),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Create an Account',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
+        child:
+        Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    hintText: 'Enter your email',
+                    suffixIcon: Icon(Icons.email),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15))),
+                  validator: (value) {
+                    setState(() {
+                      loading = false;
+                    });
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter valid email';
+                    }
+                    else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                      return 'Please enter a valid email address';
+                    }
+
+                    return
+                      null;
+
+                  }
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              TextFormField(
+                controller: passwordController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                    hintText: 'Enter your password',
+                    suffixIcon: Icon(Icons.password),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15))),
+                  validator: (value) {
+                    setState(() {
+                      loading = false;
+                    });
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    } else if (value.length < 6) {
+
+                      return 'Password must be at least 6 characters';
+                    }
+
+                    return null;
+                  },
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Button(title: 'Login', voidCallback: login, loading: loading,),
+              SizedBox(
+                height: 15,
+              ),
+              Button(title: 'Login with Phone', voidCallback: loginPhoneOtp)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Create an Account',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignupPage()));
-                    },
-                    child: Text(
-                      'Sign Up',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    ))
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            // Button(title: 'Login With Phone',voidCallback:  )
-          ],
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignupPage()));
+                      },
+                      child: Text(
+                        'Sign Up',
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      ))
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              // Button(title: 'Login With Phone',voidCallback:  )
+            ],
+          ),
         ),
       ),
     );
