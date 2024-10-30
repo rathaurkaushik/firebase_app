@@ -9,8 +9,15 @@ class PhoneAuthPage extends StatefulWidget {
 }
 
 class _PhoneAuthPageState extends State<PhoneAuthPage> {
+
+
   @override
   Widget build(BuildContext context) {
+
+    void login_with_phone(){
+
+    }
+
     return Scaffold(
 
       appBar: AppBar(
@@ -32,7 +39,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                       OutlineInputBorder(borderRadius: BorderRadius.circular(25))),
             ),
             SizedBox(height: 25,),
-            CustomButton('Login')
+            Button(title: 'Login', voidCallback: login_with_phone)
           ],
         ),
       ),
