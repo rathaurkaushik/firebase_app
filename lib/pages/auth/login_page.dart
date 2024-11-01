@@ -1,4 +1,4 @@
-
+import 'package:authenticate/pages/auth/phone_auth_page.dart';
 import 'package:authenticate/pages/auth/signUp_page.dart';
 import 'package:authenticate/pages/home_page.dart';
 import 'package:authenticate/utils/utils.dart';
@@ -16,24 +16,28 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-bool loading = false;
+  bool loading = false;
 // late bool loading;
   //login function
-  void login() async{
+  void loginphone() {}
+  void login() async {
     setState(() {
       loading = true;
     });
     FirebaseAuth _auth = FirebaseAuth.instance;
-    try{
-      await _auth.signInWithEmailAndPassword(
-          email: emailController.text.toString(),
-          password: passwordController.text.toString()).then((value){
+    try {
+      await _auth
+          .signInWithEmailAndPassword(
+              email: emailController.text.toString(),
+              password: passwordController.text.toString())
+          .then((value) {
         setState(() {
-loading = false;
+          loading = false;
         });
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       });
-    }catch(e){
+    } catch (e) {
       setState(() {
         loading = false;
       });
@@ -48,7 +52,6 @@ loading = false;
     passwordController.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,39 +63,34 @@ loading = false;
         ),
         centerTitle: true,
       ),
-      body:
-      Padding(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child:
-        Form(
+        child: Form(
           key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                    hintText: 'Enter your email',
-                    suffixIcon: Icon(Icons.email),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                      hintText: 'Enter your email',
+                      suffixIcon: Icon(Icons.email),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
                   validator: (value) {
                     setState(() {
                       loading = false;
                     });
                     if (value == null || value.isEmpty) {
                       return 'Please enter valid email';
-                    }
-                    else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                    } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                        .hasMatch(value)) {
                       return 'Please enter a valid email address';
                     }
 
-                    return
-                      null;
-
-                  }
-              ),
+                    return null;
+                  }),
               SizedBox(
                 height: 15,
               ),
@@ -104,30 +102,33 @@ loading = false;
                     suffixIcon: Icon(Icons.password),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15))),
-                  validator: (value) {
-                    setState(() {
-                      loading = false;
-                    });
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    } else if (value.length < 6) {
+                validator: (value) {
+                  setState(() {
+                    loading = false;
+                  });
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  } else if (value.length < 6) {
+                    return 'Password must be at least 6 characters';
+                  }
 
-                      return 'Password must be at least 6 characters';
-                    }
-
-                    return null;
-                  },
+                  return null;
+                },
               ),
               SizedBox(
                 height: 35,
               ),
-              Button(title: 'Login', voidCallback: login, loading: loading,),
+              Button(
+                title: 'Login',
+                voidCallback: login,
+                loading: loading,
+              ),
               SizedBox(
                 height: 15,
               ),
-              Button(title: 'Login with Phone', voidCallback: loginPhoneOtp)
+
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Create an Account',
@@ -136,6 +137,7 @@ loading = false;
                       fontWeight: FontWeight.w400,
                     ),
                   ),
+                  SizedBox(width: 30,),
                   TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -145,10 +147,28 @@ loading = false;
                       },
                       child: Text(
                         'Sign Up',
-                        style:
-                            TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w600),
                       ))
                 ],
+              ),
+              InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> PhoneAuthPage()));
+                },
+                child: Container(
+                  height: 45,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Colors.black, style: BorderStyle.solid),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Center(
+                      child: Text(
+                    'Login with Phone',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  )),
+                ),
               ),
               SizedBox(
                 height: 15,
