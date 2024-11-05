@@ -50,6 +50,7 @@ dev_dependencies:
   firebase_storage: ^12.3.4
   firebase_core: ^3.6.0
   fluttertoast: ^8.2.8
+  firebase_database: ^11.1.4
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

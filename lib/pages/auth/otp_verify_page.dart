@@ -56,7 +56,8 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
+        child:
+        Column(
           children: [
             SizedBox(
               height: 50,
