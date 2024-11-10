@@ -21,10 +21,10 @@ class _AddPostState extends State<AddPost> {
      loading = true;
    });
    try{
-
-     await databaseRef.child(DateTime.now().millisecondsSinceEpoch.toString()).set({
+  final id = DateTime.now().millisecondsSinceEpoch.toString();
+     await databaseRef.child(id).set({
        'title' : postController.text.toString(),
-       'id': DateTime.now().millisecondsSinceEpoch.toString()
+       'id': id
      });
      setState(() {
        loading = false;
