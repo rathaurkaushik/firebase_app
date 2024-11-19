@@ -41,7 +41,8 @@ class _AddPostState extends State<AddPost> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: Text(

@@ -1,4 +1,4 @@
-import 'package:authenticate/pages/home_page.dart';
+import 'package:authenticate/pages/firebase_realtime/home_page.dart';
 import 'package:authenticate/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:authenticate/widgets/button.dart';

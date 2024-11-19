@@ -1,6 +1,6 @@
 import 'package:authenticate/pages/auth/phone_auth_page.dart';
 import 'package:authenticate/pages/auth/signUp_page.dart';
-import 'package:authenticate/pages/home_page.dart';
+import 'package:authenticate/pages/firebase_realtime/home_page.dart';
 import 'package:authenticate/utils/utils.dart';
 import 'package:authenticate/widgets/button.dart';
 import 'package:flutter/material.dart';

@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:authenticate/pages/auth/login_page.dart';
-import 'package:authenticate/pages/home_page.dart';
+import 'package:authenticate/pages/firebase_realtime/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

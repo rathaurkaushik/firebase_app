@@ -1,4 +1,7 @@
-import 'package:authenticate/pages/add_post.dart';
+import 'dart:ffi';
+
+import 'package:authenticate/pages/firebase_firestore/home_page.dart';
+import 'package:authenticate/pages/firebase_realtime/add_post.dart';
 import 'package:authenticate/pages/auth/login_page.dart';
 import 'package:authenticate/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +37,13 @@ class _HomePageState extends State<HomePage> {
         ],
         centerTitle: true,
         title: Text(
-          'Home Page',
+          'Realtime Database',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.deepPurple,
       ),
-      body: Column(
+      body:
+      Column(
         children: [
           SizedBox(
             height: 10,
@@ -98,15 +102,45 @@ class _HomePageState extends State<HomePage> {
                 return Container();
               }
             },
-          ))
+          )),
+
+          SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 70.0,vertical: 10),
+              child: ElevatedButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePageFirestore()));
+              }, child: Text('Firestore', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+              style: ButtonStyle(backgroundColor:  WidgetStatePropertyAll(Colors.deepPurple)),
+
+              ),
+            ),
+          ),
+
+          SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 70.0),
+              child: ElevatedButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePageFirestore()));
+              }, child: Text('Image Firebase', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+                style: ButtonStyle(backgroundColor:  WidgetStatePropertyAll(Colors.deepPurple)),
+
+              ),
+            ),
+          ),
+          SizedBox(height: 30,),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AddPost()));
-          }),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 130.0),
+        child: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => AddPost()));
+            }),
+      ),
     );
   }
 
